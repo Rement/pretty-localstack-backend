@@ -1,0 +1,10 @@
+server:
+  port: 8880
+config:
+  localstack:
+    accessKey: dummy
+    secretKey: dummy
+    region: us-east-1
+    sqs:
+      scheme: http
+      url: localhost:4566
