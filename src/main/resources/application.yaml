@@ -1,5 +1,5 @@
 server:
-  port: 8880
+  port: 22378
 config:
   localstack:
     accessKey: dummy
@@ -8,3 +8,6 @@ config:
     sqs:
       scheme: http
       url: localhost:4566
+client:
+  localstack:
+    baseUrl: http://localhost:4566
