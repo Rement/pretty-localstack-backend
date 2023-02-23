@@ -19,10 +19,15 @@ public class MainWSResource {
 
   @Scheduled(fixedRate = 30000)
   public void sendMessage() {
+    log.info("Start sending healthcheck to ws");
+    LocalStackHealthcheckResponse health = new LocalStackHealthcheckResponse();
     try {
-      log.info("Start sending healthcheck to ws");
-      LocalStackHealthcheckResponse health = localstackClient.health();
-      this.template.convertAndSend("/dashboard", health);
+      health = localstackClient.health();
+    } catch (Exception e) {
+      log.error("Error during retrieving localstack health");
+    }
+    try {
+      this.template.convertAndSend("/health", health);
     } catch (Exception e) {
       log.error("Something went wrong: ", e);
     }
