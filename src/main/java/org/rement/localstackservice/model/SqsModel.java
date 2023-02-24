@@ -1,9 +1,9 @@
-package org.rement.localstackservice.resource;
+package org.rement.localstackservice.model;
 
 import lombok.Data;
 
 @Data
-public class TestEnt {
+public class SqsModel {
 
   private String message;
   private String queueName;
