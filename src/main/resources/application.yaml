@@ -10,4 +10,4 @@ config:
       url: localhost:4566
 client:
   localstack:
-    baseUrl: http://localhost:4566
+    baseUrl: http://127.0.0.1:4566
