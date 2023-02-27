@@ -49,10 +49,10 @@ public class SqsQueueResource {
     return sqsService.createQueue(queueName);
   }
 
-  @DeleteMapping("/queue/{queueName}")
-  public DeleteQueueResult deleteQueue(@PathVariable String queueName)
+  @DeleteMapping("/queue/{queueUrl}")
+  public DeleteQueueResult deleteQueue(@PathVariable String queueUrl)
       throws ExecutionException, InterruptedException, TimeoutException {
-    return sqsService.deleteQueue(queueName);
+    return sqsService.deleteQueue(queueUrl);
   }
 
 }

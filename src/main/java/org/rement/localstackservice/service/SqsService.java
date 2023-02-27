@@ -68,8 +68,8 @@ public class SqsService {
     return amazonSQSAsyncClient.createQueueAsync(queueName).get(5, TimeUnit.SECONDS);
   }
 
-  public DeleteQueueResult deleteQueue(String queueName) throws ExecutionException, InterruptedException, TimeoutException {
-    return amazonSQSAsyncClient.deleteQueueAsync(queueName).get(5, TimeUnit.SECONDS);
+  public DeleteQueueResult deleteQueue(String queueUrl) throws ExecutionException, InterruptedException, TimeoutException {
+    return amazonSQSAsyncClient.deleteQueueAsync(queueUrl).get(5, TimeUnit.SECONDS);
   }
 
   public DeleteMessageResult deleteMessage(String queueUrl, String receiptHandle)
