@@ -13,7 +13,6 @@ import java.util.concurrent.TimeoutException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.rement.localstackservice.model.SqsModel;
 import org.rement.localstackservice.service.SqsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,22 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping("/sqs")
-public class SqsResource {
+@RequestMapping("/sqs/queue")
+public class SqsQueueResource {
 
   private SqsService sqsService;
-
-  @PostMapping(value = "/send")
-  public Object send(@RequestBody SqsModel sqsModel) throws ExecutionException, InterruptedException, TimeoutException {
-    return sqsService.sendMessage(sqsModel.getQueueName(), sqsModel.getMessage());
-  }
-
-  @GetMapping(value = "/receive")
-  public Object receive(@RequestParam("queryUrl") String queueUrl) throws ExecutionException, InterruptedException,
-      TimeoutException {
-    String decodedUrl = URLDecoder.decode(queueUrl, StandardCharsets.UTF_8);
-    return sqsService.receiveMessage(decodedUrl);
-  }
 
   @GetMapping("/queues")
   public List<String> queues() {
