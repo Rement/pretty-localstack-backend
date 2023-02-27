@@ -37,7 +37,7 @@ public class AwsConfig {
   @Bean
   public AmazonSQSAsync indexSqsClient(AWSCredentialsProvider credentialsProvider,
                                        @Value("${config.localstack.sqs.scheme}") String protocol,
-                                       @Value("${config.localstack.sqs.url}") String sqsEndpoint) {
+                                       @Value("${config.localstack.baseUrl}") String sqsEndpoint) {
     ClientConfiguration clientConfiguration = new ClientConfiguration();
     clientConfiguration.setProtocol(
         Protocol.HTTPS.toString().equalsIgnoreCase(protocol) ? Protocol.HTTPS : Protocol.HTTP);

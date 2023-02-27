@@ -5,9 +5,6 @@ config:
     accessKey: dummy
     secretKey: dummy
     region: us-east-1
+    baseUrl: http://${LOCALSTACK_HOST:localhost}:4566
     sqs:
       scheme: http
-      url: localhost:4566
-client:
-  localstack:
-    baseUrl: http://127.0.0.1:4566
