@@ -1,6 +1,8 @@
 package org.rement.localstackservice.service;
 
 import com.amazonaws.services.sqs.AmazonSQSAsync;
+import com.amazonaws.services.sqs.model.CreateQueueResult;
+import com.amazonaws.services.sqs.model.DeleteQueueResult;
 import com.amazonaws.services.sqs.model.GetQueueAttributesRequest;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
 import com.amazonaws.services.sqs.model.Message;
@@ -59,6 +61,14 @@ public class SqsService {
     List<String> allAttributes = List.of("All");
     request.setAttributeNames(allAttributes);
     return amazonSQSAsyncClient.getQueueAttributesAsync(request).get(5, TimeUnit.SECONDS);
+  }
+
+  public CreateQueueResult createQueue(String queueName) throws ExecutionException, InterruptedException, TimeoutException {
+    return amazonSQSAsyncClient.createQueueAsync(queueName).get(5, TimeUnit.SECONDS);
+  }
+
+  public DeleteQueueResult deleteQueue(String queueName) throws ExecutionException, InterruptedException, TimeoutException {
+    return amazonSQSAsyncClient.deleteQueueAsync(queueName).get(5, TimeUnit.SECONDS);
   }
 
 }
