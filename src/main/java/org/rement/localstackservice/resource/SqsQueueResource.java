@@ -36,23 +36,24 @@ public class SqsQueueResource {
     return sqsService.getAllQueueUrls();
   }
 
-  @GetMapping("/queue")
+  @GetMapping
   public GetQueueAttributesResult getQueueDetails(@RequestParam("queryUrl") String queueUrl)
       throws ExecutionException, InterruptedException, TimeoutException {
     String decodedUrl = URLDecoder.decode(queueUrl, StandardCharsets.UTF_8);
     return sqsService.getQueueDetails(decodedUrl);
   }
 
-  @PostMapping("/queue")
+  @PostMapping
   public CreateQueueResult createQueue(@RequestBody String queueName)
       throws ExecutionException, InterruptedException, TimeoutException {
     return sqsService.createQueue(queueName);
   }
 
-  @DeleteMapping("/queue/{queueUrl}")
-  public DeleteQueueResult deleteQueue(@PathVariable String queueUrl)
+  @DeleteMapping
+  public DeleteQueueResult deleteQueue(@RequestParam("queryUrl") String queueUrl)
       throws ExecutionException, InterruptedException, TimeoutException {
-    return sqsService.deleteQueue(queueUrl);
+    String decodedUrl = URLDecoder.decode(queueUrl, StandardCharsets.UTF_8);
+    return sqsService.deleteQueue(decodedUrl);
   }
 
 }

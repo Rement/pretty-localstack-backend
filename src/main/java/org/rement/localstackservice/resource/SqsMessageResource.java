@@ -17,7 +17,6 @@ import org.rement.localstackservice.model.SqsModel;
 import org.rement.localstackservice.service.SqsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +45,12 @@ public class SqsMessageResource {
     return sqsService.receiveMessage(decodedUrl);
   }
 
-  @DeleteMapping("/{queueUrl}/{receiptHandle}")
-  public DeleteMessageResult delete(@PathVariable String queueUrl, @PathVariable String receiptHandle)
+  @DeleteMapping
+  public DeleteMessageResult delete(@RequestParam("queueUrl") String queueUrl,
+                                    @RequestParam("receiptHandle") String receiptHandle)
       throws ExecutionException, InterruptedException, TimeoutException {
-    return sqsService.deleteMessage(queueUrl, receiptHandle);
+    String decodedUrl = URLDecoder.decode(queueUrl, StandardCharsets.UTF_8);
+    return sqsService.deleteMessage(decodedUrl, receiptHandle);
   }
 
 }
